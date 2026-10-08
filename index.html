@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blackboard | Student Portal</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f4f5f6;color:#222}
+header{height:65px;background:#111;color:white;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.logo{font-size:22px;font-weight:bold}
+.logo b{background:#f4c400;color:#111;padding:10px;border-radius:6px;margin-right:10px}
+.layout{display:flex;min-height:calc(100vh - 65px)}
+aside{width:220px;background:#202020;color:white;padding:15px}
+nav{display:block;width:100%;border:0;background:none;color:white;text-align:left;padding:12px;margin:3px 0;border-radius:6px;cursor:pointer}
+nav:hover,nav.active{background:#343434;border-left:4px solid #f4c400}
+main{max-width:1200px;width:100%;padding:25px;margin:auto}
+.page{display:none}.page.active{display:block}
+.hero,.card,.panel{background:white;border-radius:10px;padding:20px;margin-bottom:18px;border:1px solid #ddd}
+.hero{border-left:6px solid #f4c400}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+.card{cursor:pointer}.card:hover{box-shadow:0 5px 15px #0002}
+.grade{font-size:26px;font-weight:bold}
+.bar{height:8px;background:#ddd;border-radius:10px;margin:12px 0}
+.fill{height:100%;background:#f4c400;border-radius:10px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:14px 5px;border-bottom:1px solid #ddd;cursor:pointer}
+.row:last-child{border:0}.row:hover{background:#fffbea}
+.pill{background:#eee;padding:6px 10px;border-radius:20px;font-size:12px}
+.gold{background:#fff1a8;font-weight:bold}
+button{font:inherit}
+.back{border:0;padding:9px 13px;border-radius:6px;cursor:pointer}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tab{padding:9px 13px;border:1px solid #ccc;background:white;border-radius:6px;cursor:pointer}
+.tab.active,.tab:hover{background:#111;color:white}
+.muted{color:#687078}
+.big{font-size:50px;font-weight:bold}
+@media(max-width:700px){aside{display:none}.layout{display:block}main{padding:15px}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo"><b>WG</b>Blackboard</div>
+<div>✉ Messages &nbsp;&nbsp; 👤 Profile</div>
+</header>
+
+<div class="layout">
+
+<aside>
+<nav class="active" onclick="show('dashboard')">🏠 Dashboard</nav>
+<nav onclick="show('courses')">📚 Courses</nav>
+<nav onclick="show('grades')">📊 Grades</nav>
+<nav onclick="show('calendar')">📅 Calendar</nav>
+<nav onclick="show('messages')">✉️ Messages</nav>
+<nav onclick="show('discussions')">💬 Discussions</nav>
+<nav onclick="show('profile')">👤 Profile</nav>
+
+<p style="color:#aaa;font-size:12px">MY COURSES</p>
+<nav onclick="course('ENGL 1102')">ENGL 1102</nav>
+<nav onclick="course('MATH 1411')">MATH 1411</nav>
+<nav onclick="course('PSYC 2112')">PSYC 2112</nav>
+<nav onclick="course('World History')">World History</nav>
+</aside>
+
+<main>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page active">
+<div class="hero">
+<h1>Welcome back</h1>
+<p class="muted">Student Portal</p>
+</div>
+
+<h2>My Courses</h2>
+
+<div class="grid">
+
+<div class="card" onclick="course('ENGL 1102')">
+<b>ENGL 1102</b>
+<h3>English Composition II</h3>
+<div class="grade">92.4%</div>
+<div class="bar"><div class="fill" style="width:92.4%"></div></div>
+</div>
+
+<div class="card" onclick="course('MATH 1411')">
+<b>MATH 1411</b>
+<h3>College Algebra</h3>
+<div class="grade">87.8%</div>
+<div class="bar"><div class="fill" style="width:87.8%"></div></div>
+</div>
+
+<div class="card" onclick="course('PSYC 2112')">
+<b>PSYC 2112</b>
+<h3>Psychology II</h3>
+<div class="grade">90.0%</div>
+<div class="bar"><div class="fill" style="width:90%"></div></div>
+</div>
+
+<div class="card" onclick="course('World History')">
+<b>HIST</b>
+<h3>World History</h3>
+<div class="grade">92.4%</div>
+<div class="bar"><div class="fill" style="width:92.4%"></div></div>
+</div>
+
+</div>
+
+<div class="panel">
+<h2>Upcoming — Sunday, October 11</h2>
+
+<div class="row" onclick="assignment('ENGL 1102','English Composition II Midterm','Midterm')">
+<span><b>English Composition II Midterm</b><br>Due Sunday</span>
+<span class="pill gold">Midterm</span>
+</div>
+
+<div class="row" onclick="assignment('MATH 1411','Math 1411 Midterm','Midterm')">
+<span><b>Math 1411 Midterm</b><br>Due Sunday</span>
+<span class="pill gold">Midterm</span>
+</div>
+
+<div class="row" onclick="assignment('PSYC 2112','Psychology II Midterm','Midterm')">
+<span><b>Psychology II Midterm</b><br>Due Sunday</span>
+<span class="pill gold">Midterm</span>
+</div>
+
+<div class="row" onclick="assignment('World History','World History Midterm','Midterm')">
+<span><b>World History Midterm</b><br>Due Sunday</span>
+<span class="pill gold">Midterm</span>
+</div>
+
+<div class="row" onclick="assignment('ENGL 1102','Research Paper','Paper')">
+<span><b>Research Paper</b><br>Due Sunday</span>
+<span class="pill gold">Paper</span>
+</div>
+
+</div>
+</section>
+
+<!-- COURSES -->
+<section id="courses" class="page">
+<div class="hero"><h1>Courses</h1><p class="muted">Current courses</p></div>
+
+<div class="grid">
+<div class="card" onclick="course('ENGL 1102')"><b>ENGL 1102</b><h3>English Composition II</h3><p>92.4%</p></div>
+<div class="card" onclick="course('MATH 1411')"><b>MATH 1411</b><h3>College Algebra</h3><p>87.8%</p></div>
+<div class="card" onclick="course('PSYC 2112')"><b>PSYC 2112</b><h3>Psychology II</h3><p>90.0%</p></div>
+<div class="card" onclick="course('World History')"><b>HIST</b><h3>World History</h3><p>92.4%</p></div>
+</div>
+</section>
+
+<!-- GRADES -->
+<section id="grades" class="page">
+<div class="hero"><h1>My Grades</h1></div>
+
+<div class="panel">
+<div class="row" onclick="course('ENGL 1102')"><b>English Composition II</b><b>92.4%</b></div>
+<div class="row" onclick="course('MATH 1411')"><b>College Algebra</b><b>87.8%</b></div>
+<div class="row" onclick="course('PSYC 2112')"><b>Psychology II</b><b>90.0%</b></div>
+<div class="row" onclick="course('World History')"><b>World History</b><b>92.4%</b></div>
+</div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar" class="page">
+<div class="hero"><h1>Calendar</h1></div>
+
+<div class="panel">
+<h2>Sunday, October 11</h2>
+<div id="calendarList"></div>
+</div>
+</section>
+
+<!-- MESSAGES -->
+<section id="messages" class="page">
+<div class="hero"><h1>Messages</h1></div>
+
+<div class="panel">
+<div class="row" onclick="detail('Instructor Message','Your midterm study materials are now available. Please review the study guide before Sunday.')">
+<b>Midterm study materials available</b><span class="pill gold">New</span>
+</div>
+
+<div class="row" onclick="detail('Research Paper Reminder','Your research paper is due Sunday. Review the assignment requirements before submitting.')">
+<b>Research paper reminder</b><span class="pill">Recent</span>
+</div>
+</div>
+</section>
+
+<!-- DISCUSSIONS -->
+<section id="discussions" class="page">
+<div class="hero"><h1>Discussions</h1></div>
+
+<div class="panel">
+<div class="row" onclick="detail('English Discussion','What makes an argument persuasive? Share your response and reply to two classmates.')">
+<b>What makes an argument persuasive?</b><span>8 replies</span>
+</div>
+
+<div class="row" onclick="detail('Psychology Discussion','How do personality and environment influence behavior?')">
+<b>Personality and behavior</b><span>12 replies</span>
+</div>
+</div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+<div class="hero"><h1>Student Profile</h1></div>
+
+<div class="panel">
+<div class="row"><b>Name</b><span>Student</span></div>
+<div class="row"><b>Institution</b><span>West Georgia Technical College</span></div>
+<div class="row"><b>Portal</b><span>Blackboard</span></div>
+<div class="row"><b>Notifications</b><span class="pill gold">Enabled</span></div>
+</div>
+</section>
+
+<!-- COURSE -->
+<section id="course" class="page">
+<button class="back" onclick="show('courses')">← Back</button>
+
+<div class="hero">
+<div id="courseCode"></div>
+<h1 id="courseName"></h1>
+
+<div class="tabs">
+<button class="tab active" onclick="courseTab('home',this)">Home</button>
+<button class="tab" onclick="courseTab('assignments',this)">Assignments</button>
+<button class="tab" onclick="courseTab('grades',this)">Grades</button>
+<button class="tab" onclick="courseTab('materials',this)">Materials</button>
+<button class="tab" onclick="courseTab('announcements',this)">Announcements</button>
+</div>
+</div>
+
+<div class="panel" id="courseContent"></div>
+</section>
+
+<!-- DETAIL -->
+<section id="detail" class="page">
+<button class="back" onclick="course(currentCourse)">← Back</button>
+
+<div class="hero">
+<div class="muted" id="detailCourse"></div>
+<h1 id="detailTitle"></h1>
+</div>
+
+<div class="panel" id="detailContent"></div>
+</section>
+
+</main>
+</div>
+
+<script>
+
+const courses={
+
+"ENGL 1102":{
+name:"English Composition II",
+grade:"92.4%",
+assignments:[
+["Essay 1 — Rhetorical Analysis","Graded"],
+["Discussion Board — Argument & Evidence","Graded"],
+["Research Assignment","Graded"],
+["English Composition II Midterm","Due Sunday, October 11"],
+["Research Paper","Due Sunday, October 11"]
+],
+materials:["Course Syllabus","Rhetorical Reading","Argument & Evidence","Research Guide","Citation Guide"]
+},
+
+"MATH 1411":{
+name:"College Algebra",
+grade:"87.8%",
+assignments:[
+["Homework Set 1","Graded"],
+["Functions Practice","Graded"],
+["Quiz 3","Graded"],
+["Math 1411 Midterm","Due Sunday, October 11"]
+],
+materials:["Course Syllabus","Algebra Review","Functions and Graphs","Study Guide","Practice Problems"]
+},
+
+"PSYC 2112":{
+name:"Psychology II",
+grade:"90.0%",
+assignments:[
+["Chapter 8 Quiz","Graded"],
+["Discussion — Personality","Graded"],
+["Chapter 11 Review","Graded"],
+["Psychology II Midterm","Due Sunday, October 11"]
+],
+materials:["Course Syllabus","Development & Personality","Psychological Disorders","Study Guide","Chapter Readings"]
+},
+
+"World History":{
+name:"World History",
+grade:"92.4%",
+assignments:[
+["Chapter 5 Quiz","Graded"],
+["Primary Source Analysis","Graded"],
+["Global Change Discussion","Graded"],
+["World History Midterm","Due Sunday, October 11"]
+],
+materials:["Course Syllabus","Ancient Civilizations","World Religions","Modern Global History","Midterm Study Guide"]
+}
+
+};
+
+let currentCourse="ENGL 1102";
+
+function show(id){
+
+document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll("nav").forEach(x=>x.classList.remove("active"));
+
+window.scrollTo(0,0);
+
+}
+
+function course(code){
+
+currentCourse=code;
+
+let c=courses[code];
+
+document.getElementById("courseCode").innerText=code;
+
+document.getElementById("courseName").innerText=c.name;
+
+show("course");
+
+courseTab("home",document.querySelector(".tab"));
+
+}
+
+function courseTab(type,button){
+
+let c=courses[currentCourse];
+
+document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+
+if(button)button.classList.add("active");
+
+let box=document.getElementById("courseContent");
+
+if(type==="home"){
+
+box.innerHTML=`
+<h2>${c.name}</h2>
+<p>Welcome to your course. Assignments, materials, grades, and announcements are available here.</p>
+<div class="hero">
+<b>Current Grade</b>
+<div class="big">${c.grade}</div>
+</div>`;
+
+}
+
+if(type==="assignments"){
+
+box.innerHTML="<h2>Assignments</h2>"+c.assignments.map((a,i)=>`
+<div class="row" onclick="assignment('${currentCourse}','${a[0]}','${a[1]}')">
+<b>${a[0]}</b>
+<span class="pill ${a[1].includes('Due')?'gold':''}">${a[1]}</span>
+</div>`).join("");
+
+}
+
+if(type==="grades"){
+
+box.innerHTML=`
+<h2>Gradebook</h2>
+<div class="big">${c.grade}</div>
+<p>Current Course Grade</p>
+<div class="bar"><div class="fill" style="width:${parseFloat(c.grade)}%"></div></div>`;
+
+}
+
+if(type==="materials"){
+
+box.innerHTML="<h2>Course Materials</h2>"+c.materials.map(x=>`
+<div class="row" onclick="detail('${x}','${c.name}','Course material and study resources are available here.')">
+<b>${x}</b><span>View →</span>
+</div>`).join("");
+
+}
+
+if(type==="announcements"){
+
+box.innerHTML=`
+<h2>Announcements</h2>
+<div class="row" onclick="detail('Midterm Reminder','${c.name}','Your midterm is due Sunday, October 11. Please review the study materials before submitting.')">
+<b>Midterm Reminder</b><span class="pill gold">New</span>
+</div>`;
+
+}
+
+}
+
+function assignment(courseName,title,status){
+
+let extra=status.includes("Due")
+?`<div class="hero"><b>Due:</b> Sunday, October 11<br><b>Status:</b> ${status}</div>`
+:`<div class="hero"><b>Status:</b> ${status}</div>`;
+
+detail(title,courseName,
+`<h2>Assignment Details</h2>
+<p>Review the assignment instructions and requirements before submitting your work.</p>
+${extra}
+<h3>Instructions</h3>
+<p>Complete the assigned work using the course requirements and submit it through the course assignment area.</p>`);
+
+}
+
+function detail(title,courseName,text){
+
+document.getElementById("detailTitle").innerText=title;
+
+document.getElementById("detailCourse").innerText=courseName;
+
+document.getElementById("detailContent").innerHTML=text;
+
+show("detail");
+
+}
+
+const upcoming=[
+["ENGL 1102","English Composition II Midterm","Midterm"],
+["MATH 1411","Math 1411 Midterm","Midterm"],
+["PSYC 2112","Psychology II Midterm","Midterm"],
+["World History","World History Midterm","Midterm"],
+["ENGL 1102","Research Paper","Paper"]
+];
+
+document.getElementById("calendarList").innerHTML=upcoming.map(x=>`
+<div class="row" onclick="assignment('${x[0]}','${x[1]}','Due Sunday, October 11')">
+<span><b>${x[1]}</b><br>Due Sunday, October 11</span>
+<span class="pill gold">${x[2]}</span>
+</div>
+`).join("");
+
+</script>
+
+</body>
+</html>
